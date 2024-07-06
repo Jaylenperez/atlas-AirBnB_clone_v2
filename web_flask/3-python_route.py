@@ -25,6 +25,13 @@ def c_route(text):
     display_text = text.replace('_', ' ')
     return 'C {}'.format(display_text)
 
+@app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python_route(text):
+    """Displays 'Python' , followed by the value of the text variable (replace underscore _ symbols with a space)"""
+    display_text = text.replace('_', ' ')
+    return 'Python {}'.format(display_text)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
