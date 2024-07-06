@@ -40,8 +40,11 @@ def python_route(text):
     return 'Python {}'.format(display_text)
 
 
-@app.route('/number/int:n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def number_route(n):
+    """
+    Displays 'n is a number' only if n is an integer
+    """
     return '{} is a number'.format(n)
 
 
