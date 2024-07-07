@@ -83,3 +83,10 @@ class FileStorage():
             return
         key = obj.to_dict()['__class__'] + '.' + obj.id
         del self.all()[key]
+    
+    def close(self):
+        """
+        Reloads the JSON file to synchronize objects
+        and clone the current session.
+        """
+        self.reload()
