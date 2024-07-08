@@ -14,18 +14,16 @@ class State(BaseModel, Base):
     """State class."""
 
     __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
 
     if storage_type == "db":
-        name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state",
                           cascade="all, delete-orphan")
-
-
+    else:
         @property
         def cities(self):
             """Getter attribute for cities."""
             listofcities = []
-
             all_cities = storage.all(City)
             for city in all_cities.values():
                 if city.state_id == self.id:
