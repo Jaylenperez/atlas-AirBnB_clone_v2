@@ -2,10 +2,8 @@
 """ State Module for HBNB project """
 import models
 from models.city import City
-from models.base_model import BaseModel
-from models.base_model import Base
-from sqlalchemy import String
-from sqlalchemy import Column
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from os import getenv
 
@@ -22,7 +20,8 @@ class State(BaseModel, Base):
         def cities(self):
             """Getter attribute for cities."""
             listofcities = []
-            for city in models.storage.all(City).values():
+            all_cities = models.storage.all(City)
+            for city in all_cities.values():
                 if city.state_id == self.id:
                     listofcities.append(city)
             return listofcities
