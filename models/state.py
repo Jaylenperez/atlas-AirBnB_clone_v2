@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""State Module for HBNB project."""
 import models
 from models.city import City
 from models.base_model import BaseModel, Base
@@ -9,12 +9,12 @@ from os import getenv
 
 
 class State(BaseModel, Base):
-    """ State class """
+    """State class."""
+
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
     cities = relationship("City", backref="state",
                           cascade="all, delete-orphan")
-
 
     if getenv('HBNB_TYPE_STORAGE') != 'db':
         @property
