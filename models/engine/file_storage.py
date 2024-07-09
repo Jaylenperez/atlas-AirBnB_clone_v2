@@ -47,7 +47,10 @@ class FileStorage():
     def save(self):
         """This method serializes __objects to the JSON file path
         located in "__file_path" variable."""
-        obj_dict = {obj_id: obj.to_dict() for obj_id, obj in self.__objects.items()}
+        obj_dict = {
+            obj_id: obj.to_dict()
+            for obj_id, obj in self.__objects.items()
+        }
         with open(self.__file_path, 'w') as f:
             json.dump(obj_dict, f)
 
@@ -81,7 +84,7 @@ class FileStorage():
             return
         key = obj.to_dict()['__class__'] + '.' + obj.id
         del self.all()[key]
-    
+
     def close(self):
         """
         Reloads the JSON file to synchronize objects
