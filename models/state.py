@@ -16,19 +16,20 @@ class State(BaseModel, Base):
     Represents a state for a MySQL database.
     Inherits from SQLAlchemy Base and links to MySQL table states.
     """
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", backref="state",
+    if models.storage_t == "db":
+        __tablename__ = 'states'
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state",
                           cascade="all, delete-orphan")
+    else:
+        name = ""
 
-    if STORAGE_TYPE != 'db':
-        name = ''
-        cities = []
         @property
         def cities(self):
             """Getter attribute for cities if storage is not DBStorage."""
             listofcities = []
-            for city in models.storage.all(City).values():
-                if city.state_id == self.id:
-                    listofcities.append(city)
+            if models.storage_t != "db":
+                for city in models.storage.all(City).values():
+                    if city.state_id == self.id:
+                        listofcities.append(city)
             return listofcities
