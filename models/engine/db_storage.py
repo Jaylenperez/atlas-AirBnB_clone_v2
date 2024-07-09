@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sqlalchemy
 from sqlalchemy import create_engine
 from models.base_model import BaseModel, Base
 from os import getenv
