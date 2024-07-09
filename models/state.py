@@ -9,15 +9,21 @@ from sqlalchemy import Column
 from sqlalchemy.orm import relationship
 from os import getenv
 
+STORAGE_TYPE = getenv("HBNB_TYPE_STORAGE")
 
 class State(BaseModel, Base):
-    """ State class """
+    """
+    Represents a state for a MySQL database.
+    Inherits from SQLAlchemy Base and links to MySQL table states.
+    """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
     cities = relationship("City", backref="state",
                           cascade="all, delete-orphan")
 
-    if getenv('HBNB_TYPE_STORAGE') != 'db':
+    if STORAGE_TYPE != 'db':
+        name = ''
+        cities = []
         @property
         def cities(self):
             """Getter attribute for cities if storage is not DBStorage."""
