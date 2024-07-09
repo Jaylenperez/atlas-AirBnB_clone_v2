@@ -59,7 +59,6 @@ class DBStorage:
 
         return all_dicts
 
-
     def new(self, obj):
         """Add the object to the database session"""
         self.__session.add(obj)
