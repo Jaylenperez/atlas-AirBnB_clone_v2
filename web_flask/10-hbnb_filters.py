@@ -18,9 +18,10 @@ app = Flask(__name__)
 def filters():
     """
     Display web page with a list of all State and Amenity objects.
-    
+
     Retrieves all State and Amenity objects from the storage.
-    Passes the lists of states and amenities to the HTML template '10-hbnb_filters
+    Passes the lists of states and amenities to the HTML template
+    '10-hbnb_filters'
     """
     states = storage.all("State").values()
     amenities = storage.all("Amenity").values()
@@ -37,6 +38,7 @@ def teardown_db(exception):
     It ensures that the storage is properly closed.
     """
     storage.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')

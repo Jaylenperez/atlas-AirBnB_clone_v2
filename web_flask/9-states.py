@@ -11,10 +11,12 @@ from os import getenv
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """Close the current SQLAlchemy Session"""
     storage.close()
+
 
 @app.route('/states', strict_slashes=False)
 def states():
@@ -22,6 +24,7 @@ def states():
     states = storage.all(State).values()
     states = sorted(states, key=lambda x: x.name)
     return render_template('9-states.html', states=states)
+
 
 @app.route('/states/<id>', strict_slashes=False)
 def state_cities(id):
@@ -33,7 +36,8 @@ def state_cities(id):
             state = s
             break
     if state:
-        cities = state.cities if getenv('HBNB_TYPE_STORAGE') == 'db' else state.cities()
+        cities = state.cities if getenv('HBNB_TYPE_STORAGE') == 'db' \
+            else state.cities()
         cities = sorted(cities, key=lambda x: x.name)
         return render_template('9-state.html', state=state, cities=cities)
     else:

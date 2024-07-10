@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Flask web application that displays a list of all State objects present in DBStorage
+Flask web application that displays
+a list of all State objects present in DBStorage.
 """
 from flask import Flask, render_template
 from models import storage
@@ -20,6 +21,7 @@ def cities_by_states():
 def teardown_db(exception):
     """Closes the storage on teardown."""
     storage.close()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
